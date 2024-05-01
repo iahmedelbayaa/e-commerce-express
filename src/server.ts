@@ -1,5 +1,6 @@
 import express from 'express';
-import { myDataSource } from './utils/db.config';
+import router from './router';
+import sequelize from './utils/sequlize.config';
 
 const app = express();
 
@@ -8,15 +9,19 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT ?? 3000;
 
+app.use('/api', router);
 
-myDataSource
-    .initialize()
-    .then(() => {
-        console.log("Data Source has been initialized!")
-    })
-    .catch((err) => {
-        console.error("Error during Data Source initialization:", err)
-    })
+sequelize.sync({ force: true }).then(() => {
+    console.log('Database synced');
+});
+
+sequelize.authenticate().then(() => {
+    console.log('Database connected');
+}
+).catch((err) => {
+    console.log('Database connection failed', err);
+});
+
 
 
 app.listen(PORT, () => {

@@ -1,13 +1,22 @@
-import { DataSource } from "typeorm"
+import dotenv from 'dotenv'
+import { Dialect } from 'sequelize';
 
-export const myDataSource = new DataSource({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    // username: "test",
-    // password: "test",
-    database: "e-commerce",
-    entities: ["src/entity/*.js"],
-    logging: true,
-    synchronize: true,
-})
+
+dotenv.config();
+
+const dbConfig = {
+  host: process.env.POSTGRES_HOST ?? 'localhost',
+  user: process.env.POSTGRES_USER!,
+  password: process.env.POSTGRES_PASSWORD!,
+  db: process.env.POSTGRES_DB!,
+  dialect: (process.env.DIALECT ?? 'postgres') as Dialect,
+  query: { raw: true, plain: false, nest: true },
+  pool: {
+    min: 0,
+    max: 5,
+    acquire: 30000,
+    idle: 10000,
+  },
+};
+
+export default dbConfig;

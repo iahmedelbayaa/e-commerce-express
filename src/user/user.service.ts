@@ -1,22 +1,21 @@
-import { UserEntity } from "./user.entity";
-import { myDataSource } from "../utils/db.config";
+
+import UserEntity from "./user.entity";
 import { IUser } from "./user.interface";
 
-
 export class UserService {
-    private UserRepository = myDataSource.getRepository(UserEntity);
 
-    async create(user: IUser) {
-        const userExist = await this.UserRepository.findOne({ where: { email: user.email } });
+    async create(user: Partial<IUser>) {
+        const userExist = await UserEntity.findOne({ where: { email: user.email } });
         if (userExist) {
             return { message: 'User already exists' };
         }
-        await this.UserRepository.save(user);
+        await UserEntity.create(user); 
         return { message: 'User created' };
     }
+    
 
     async findAll() {
-        const usersExist = await this.UserRepository.find();
+        const usersExist = await UserEntity.findAll();
         if (usersExist.length === 0) {
             return { message: 'No users found' };
         }
@@ -24,29 +23,28 @@ export class UserService {
     }
 
     async findOne(id: number) {
-        const userExist = await this.UserRepository.findOne({where :{id : id}});
+        const userExist = await UserEntity.findByPk(id);
         if (!userExist) {
             return { message: 'User not found' };
         }
         return userExist;
     }
 
-    async update(id: number, user: IUser) {
-        const userExist = await this.UserRepository.findOne({where :{id : id}});
+    async update(id: number, user: Partial<IUser>) {
+        const userExist = await UserEntity.findByPk(id);
         if (!userExist) {
             return { message: 'User not found' };
         }
-        await this.UserRepository.update(id, user);
+        await userExist.update(user);
         return { message: 'User updated' };
     }
 
     async remove(id: number) {
-        const userExist = await this.UserRepository.findOne({where :{id : id}});
+        const userExist = await UserEntity.findByPk(id);
         if (!userExist) {
             return { message: 'User not found' };
         }
-        await this.UserRepository.delete(id);
+        await userExist.destroy();
         return { message: 'User deleted' };
     }
-
 }
