@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import sequelize from '../utils/sequlize.config';
+import sequelize from '../utils/sequelize.config';
 
 class UserEntity extends Model {
     public id!: number;
