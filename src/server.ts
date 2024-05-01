@@ -1,6 +1,6 @@
 import express from 'express';
 import router from './router';
-import sequelize from './utils/sequlize.config';
+import sequelize from './utils/sequelize.config';
 
 const app = express();
 
