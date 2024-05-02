@@ -1,4 +1,3 @@
-import {StatusCode} from './status-code';
 
 export class ResponseError extends Error {
     status
