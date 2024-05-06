@@ -20,7 +20,7 @@ RoleEntity.init(
     },
     {
         sequelize,
-        modelName: 'Role',
+        modelName: 'Roles',
         timestamps: true,
     }
 );
