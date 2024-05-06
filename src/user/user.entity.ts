@@ -6,7 +6,6 @@ class UserEntity extends Model {
     public username!: string;
     public email!: string;
     public password!: string;
-    public role!: string;
 }
 
 UserEntity.init(
@@ -33,14 +32,10 @@ UserEntity.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        role: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
     },
     {
         sequelize,
-        modelName: 'User',
+        modelName: 'Users',
         timestamps: true,
     }
 );
