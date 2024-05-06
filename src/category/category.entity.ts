@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../utils/sequelize.config";
 
-export class categoryEntity extends Model{
+export class CategoryEntity extends Model{
     id: number;
     name: string;
     description: string;
@@ -10,7 +10,7 @@ export class categoryEntity extends Model{
     updated_at?: Date;
 }
 
-categoryEntity.init({
+CategoryEntity.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
