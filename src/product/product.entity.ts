@@ -8,7 +8,7 @@ export class ProductEntity extends Model {
     description: string;
     image: string;
     quantity: number;
-    category: string;
+    // category: string;
     rating: number;
     discount: number;
     status: string;
@@ -43,10 +43,10 @@ ProductEntity.init({
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    category: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+    // category: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
     rating: {
         type: DataTypes.DECIMAL,
         allowNull: false
