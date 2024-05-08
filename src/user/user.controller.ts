@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { UserService } from "./user.service";
 import { IUser } from "./user.interface";
-import ApiError from "../utils/handle-api/api.error";
 
 
 
@@ -18,7 +17,7 @@ export class UserController {
             const response = await this.userService.create(user);
             res.status(201).json(response);
         } catch (error : any) {
-            throw ApiError.badRequest(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 
@@ -27,7 +26,7 @@ export class UserController {
             const response = await this.userService.findAll();
             res.status(200).json(response);
         } catch (error : any) {
-            throw ApiError.badRequest(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 
@@ -37,7 +36,7 @@ export class UserController {
             const response = await this.userService.findOne(id);
             res.status(200).json(response);
         } catch (error : any) {
-            throw ApiError.badRequest(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 
@@ -48,7 +47,7 @@ export class UserController {
             const response = await this.userService.update(id, user);
             res.status(200).json(response);
         } catch (error : any) {
-            throw ApiError.badRequest(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 
@@ -58,7 +57,7 @@ export class UserController {
             const response = await this.userService.remove(id);
             res.status(200).json(response);
         } catch (error : any) {
-            throw ApiError.badRequest(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 }
